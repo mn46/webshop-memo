@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { type Category, type CartProduct, type Product } from "./types";
 import ProductCard from "./components/ProductCard";
 import ProductModal from "./components/ProductModal";
@@ -54,9 +54,11 @@ function App() {
     fetchCategories();
   }, []);
 
-  const filteredProducts = activeCategory
-    ? products.filter((product) => product.category === activeCategory)
-    : products;
+  const filteredProducts = useMemo(() => {
+    return activeCategory
+      ? products.filter((product) => product.category === activeCategory)
+      : products;
+  }, [activeCategory, products]);
 
   const handleOpenCart = () => {
     setIsCartOpen(true);
@@ -84,7 +86,7 @@ function App() {
               <button
                 key={category.name}
                 onClick={() => handleSetActiveCategory(category.slug)}
-                className={`rounded-full px-4 ${activeCategory === category.name ? "bg-black text-white" : "bg-gray-300"} `}
+                className={`rounded-full px-4 ${activeCategory === category.slug ? "bg-black text-white" : "bg-gray-300"} `}
               >
                 {category.name}
               </button>

@@ -1,4 +1,4 @@
-import React, { type SetStateAction } from "react";
+import React, { memo, type SetStateAction } from "react";
 import type { Product } from "../types";
 
 interface Props {
@@ -6,7 +6,10 @@ interface Props {
   setSelectedProduct: React.Dispatch<SetStateAction<Product | null>>;
 }
 
-const ProductCard: React.FC<Props> = ({ product, setSelectedProduct }) => {
+const ProductCard: React.FC<Props> = memo(function ({
+  product,
+  setSelectedProduct,
+}) {
   const handleSetSelectedProduct = () => {
     setSelectedProduct(product);
   };
@@ -22,6 +25,6 @@ const ProductCard: React.FC<Props> = ({ product, setSelectedProduct }) => {
       <p>{product.price} DKK</p>
     </button>
   );
-};
+});
 
 export default ProductCard;
