@@ -54,7 +54,7 @@ const ProductModal: React.FC<Props> = ({
           <img
             src={product.images[0]}
             alt={product.title}
-            className="rounded-xl"
+            className="rounded-xl h-[90%] w-auto"
           />
           <div className="flex flex-col gap-5">
             <h2 className="text-3xl font-semibold">{product.title}</h2>
